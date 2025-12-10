@@ -32,14 +32,19 @@ tasks {
 
 gradlePlugin {
     plugins {
-        register("androidApplication"){
+        register("androidApplication") {
             id = "uz.dev.muhammadali.convention.android.application"
             implementationClass = "AndroidApplicationConventionPlugin"
         }
 
-        register("androidComposeApplication"){
+        register("androidComposeApplication") {
             id = "uz.dev.muhammadali.convention.android.application.compose"
             implementationClass = "AndroidApplicationComposeConventionPlugin"
+        }
+
+        register("cmpApplication") {
+            id = "uz.dev.muhammadali.convention.cmp.application"
+            implementationClass = "CmpApplicationConventionPlugin"
         }
 
 
