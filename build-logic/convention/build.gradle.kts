@@ -11,6 +11,7 @@ dependencies {
     compileOnly(libs.android.tools.common)
     compileOnly(libs.kotlin.gradlePlugin)
     compileOnly(libs.compose.gradlePlugin)
+    compileOnly(libs.ksp.gradlePlugin)
 }
 java {
     sourceCompatibility = JavaVersion.VERSION_17
@@ -46,6 +47,13 @@ gradlePlugin {
             id = "uz.dev.muhammadali.convention.cmp.application"
             implementationClass = "CmpApplicationConventionPlugin"
         }
+
+        register("kmpLibrary") {
+            id = "uz.dev.muhammadali.convention.kmp.library"
+            implementationClass = "KmpLibraryConventionPlugin"
+        }
+
+
 
 
     }

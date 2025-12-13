@@ -5,9 +5,7 @@ import org.gradle.kotlin.dsl.configure
 import org.jetbrains.kotlin.gradle.dsl.JvmTarget
 import org.jetbrains.kotlin.gradle.dsl.KotlinMultiplatformExtension
 
-internal fun Project.configureAndroidTarget(
-
-) {
+internal fun Project.configureAndroidTarget() {
     extensions.configure<KotlinMultiplatformExtension> {
         androidTarget {
             compilerOptions {
