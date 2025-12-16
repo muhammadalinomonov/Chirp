@@ -53,8 +53,16 @@ gradlePlugin {
             implementationClass = "KmpLibraryConventionPlugin"
         }
 
+        register("cmpLibrary") {
+            id = "uz.dev.muhammadali.convention.cmp.library"
+            implementationClass = "CmpLibraryConventionPlugin"
+        }
 
 
+        register("cmpFeature") {
+            id = "uz.dev.muhammadali.convention.cmp.feature"
+            implementationClass = "CmpFeatureConventionPlugin"
+        }
 
     }
 
