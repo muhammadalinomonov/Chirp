@@ -12,6 +12,8 @@ dependencies {
     compileOnly(libs.kotlin.gradlePlugin)
     compileOnly(libs.compose.gradlePlugin)
     compileOnly(libs.ksp.gradlePlugin)
+    implementation(libs.buildkonfig.gradlePlugin)
+    implementation(libs.buildkonfig.compiler)
 }
 java {
     sourceCompatibility = JavaVersion.VERSION_17
@@ -62,6 +64,12 @@ gradlePlugin {
         register("cmpFeature") {
             id = "uz.dev.muhammadali.convention.cmp.feature"
             implementationClass = "CmpFeatureConventionPlugin"
+        }
+
+
+        register("buildKonfig") {
+            id = "uz.dev.muhammadali.convention.buildkonfig"
+            implementationClass = "BuildKonfigConventionPlugin"
         }
 
     }
