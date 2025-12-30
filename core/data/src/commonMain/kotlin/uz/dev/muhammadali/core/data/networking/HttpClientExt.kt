@@ -1,7 +1,16 @@
 package uz.dev.muhammadali.core.data.networking
 
+import io.ktor.client.HttpClient
 import io.ktor.client.call.NoTransformationFoundException
 import io.ktor.client.call.body
+import io.ktor.client.request.HttpRequestBuilder
+import io.ktor.client.request.delete
+import io.ktor.client.request.get
+import io.ktor.client.request.parameter
+import io.ktor.client.request.post
+import io.ktor.client.request.put
+import io.ktor.client.request.setBody
+import io.ktor.client.request.url
 import io.ktor.client.statement.HttpResponse
 import uz.dev.muhammadali.domain.domain.util.DataError
 import uz.dev.muhammadali.domain.domain.util.Result
@@ -11,6 +20,75 @@ expect suspend fun <T> platformSafeCall(
     execute: suspend () -> HttpResponse,
     handlerResponse: suspend (HttpResponse) -> Result<T, DataError.Remote>
 ): Result<T, DataError.Remote>
+
+suspend inline fun <reified Request, reified Response : Any> HttpClient.post(
+    route: String,
+    queryParameters: Map<String, dynamic> = mapOf(),
+    body: Request,
+    crossinline builder: HttpRequestBuilder.() -> Unit = {}
+): Result<Response, DataError.Remote> {
+    return safeCall {
+        post {
+            url(constructRoute(route))
+            queryParameters.forEach { (key, value) ->
+                parameter(key, value)
+            }
+            setBody(body)
+            builder()
+        }
+    }
+}
+
+suspend inline fun <reified Response : Any> HttpClient.get(
+    route: String,
+    queryParameters: Map<String, dynamic> = mapOf(),
+    crossinline builder: HttpRequestBuilder.() -> Unit = {}
+): Result<Response, DataError.Remote> {
+    return safeCall {
+        get {
+            url(constructRoute(route))
+            queryParameters.forEach { (key, value) ->
+                parameter(key, value)
+            }
+            builder()
+        }
+    }
+}
+
+
+suspend inline fun <reified Response : Any> HttpClient.delete(
+    route: String,
+    queryParameters: Map<String, dynamic> = mapOf(),
+    crossinline builder: HttpRequestBuilder.() -> Unit = {}
+): Result<Response, DataError.Remote> {
+    return safeCall {
+        delete {
+            url(constructRoute(route))
+            queryParameters.forEach { (key, value) ->
+                parameter(key, value)
+            }
+            builder()
+        }
+    }
+}
+
+suspend inline fun <reified Request, reified Response : Any> HttpClient.put(
+    route: String,
+    queryParameters: Map<String, dynamic> = mapOf(),
+    body: Request,
+    crossinline builder: HttpRequestBuilder.() -> Unit = {}
+): Result<Response, DataError.Remote> {
+    return safeCall {
+        put {
+            url(constructRoute(route))
+            queryParameters.forEach { (key, value) ->
+                parameter(key, value)
+            }
+            setBody(body)
+            builder()
+        }
+    }
+}
 
 suspend inline fun <reified T> safeCall(
     noinline execute: suspend () -> HttpResponse
