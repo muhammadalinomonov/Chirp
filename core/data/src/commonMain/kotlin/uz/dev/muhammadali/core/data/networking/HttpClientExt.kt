@@ -23,7 +23,7 @@ expect suspend fun <T> platformSafeCall(
 
 suspend inline fun <reified Request, reified Response : Any> HttpClient.post(
     route: String,
-    queryParameters: Map<String, dynamic> = mapOf(),
+    queryParameters: Map<String, Any> = mapOf(),
     body: Request,
     crossinline builder: HttpRequestBuilder.() -> Unit = {}
 ): Result<Response, DataError.Remote> {
@@ -41,7 +41,7 @@ suspend inline fun <reified Request, reified Response : Any> HttpClient.post(
 
 suspend inline fun <reified Response : Any> HttpClient.get(
     route: String,
-    queryParameters: Map<String, dynamic> = mapOf(),
+    queryParameters: Map<String, Any> = mapOf(),
     crossinline builder: HttpRequestBuilder.() -> Unit = {}
 ): Result<Response, DataError.Remote> {
     return safeCall {
@@ -58,7 +58,7 @@ suspend inline fun <reified Response : Any> HttpClient.get(
 
 suspend inline fun <reified Response : Any> HttpClient.delete(
     route: String,
-    queryParameters: Map<String, dynamic> = mapOf(),
+    queryParameters: Map<String, Any> = mapOf(),
     crossinline builder: HttpRequestBuilder.() -> Unit = {}
 ): Result<Response, DataError.Remote> {
     return safeCall {
@@ -74,7 +74,7 @@ suspend inline fun <reified Response : Any> HttpClient.delete(
 
 suspend inline fun <reified Request, reified Response : Any> HttpClient.put(
     route: String,
-    queryParameters: Map<String, dynamic> = mapOf(),
+    queryParameters: Map<String, Any> = mapOf(),
     body: Request,
     crossinline builder: HttpRequestBuilder.() -> Unit = {}
 ): Result<Response, DataError.Remote> {
