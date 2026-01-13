@@ -5,7 +5,7 @@ import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.tooling.preview.PreviewLightDark
 import androidx.compose.ui.tooling.preview.PreviewScreenSizes
-import uz.dev.muhammadali.core.designsystem.components.brand.ChirpBrandLogo
+import uz.dev.muhammadali.core.designsystem.components.brand.ChirpSuccessIcon
 import uz.dev.muhammadali.core.designsystem.components.layouts.ChirpAdaptiveFormLayout
 import uz.dev.muhammadali.core.designsystem.theme.AppTheme
 
@@ -17,7 +17,7 @@ fun ChirpAdaptiveFormLayoutPreview() {
         ChirpAdaptiveFormLayout(
             headerText = "Welcome to Chirp!",
             errorText = "Login failed!",
-            logo = { ChirpBrandLogo() },
+            logo = { ChirpSuccessIcon() },
             formContent = {
                 Text(
                     text = "Sample form title",

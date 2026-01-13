@@ -27,7 +27,7 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import org.jetbrains.compose.ui.tooling.preview.Preview
-import uz.dev.muhammadali.core.designsystem.components.brand.ChirpBrandLogo
+import uz.dev.muhammadali.core.designsystem.components.brand.ChirpSuccessIcon
 import uz.dev.muhammadali.core.designsystem.theme.AppTheme
 import uz.dev.muhammadali.core.designsystem.theme.extended
 import uz.dev.muhammadali.core.presentation.util.DeviceConfiguration
@@ -170,7 +170,7 @@ fun ChirpAdaptiveFormLayoutLightPreview() {
             headerText = "Welcome to Chirp!",
             errorText = "Something went wrong",
             logo = {
-                ChirpBrandLogo()
+                ChirpSuccessIcon()
             },
             formContent = {
                 Text(text = "Form content")
@@ -187,7 +187,7 @@ fun ChirpAdaptiveFormLayoutDarkPreview() {
             headerText = "Welcome to Chirp!",
             errorText = "Something went wrong",
             logo = {
-                ChirpBrandLogo()
+                ChirpSuccessIcon()
             },
             formContent = {
                 Text(text = "Form content")

@@ -22,7 +22,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.unit.dp
 import org.jetbrains.compose.ui.tooling.preview.Preview
-import uz.dev.muhammadali.core.designsystem.components.brand.ChirpBrandLogo
+import uz.dev.muhammadali.core.designsystem.components.brand.ChirpSuccessIcon
 import uz.dev.muhammadali.core.designsystem.theme.AppTheme
 import uz.dev.muhammadali.core.presentation.util.currentDeviceConfiguration
 
@@ -42,7 +42,7 @@ fun ChirpAdaptiveResultLayout(
                     .padding(innerPadding),
                 header = {
                     Spacer(modifier = Modifier.height(32.dp))
-                    ChirpBrandLogo()
+                    ChirpSuccessIcon()
                     Spacer(modifier = Modifier.height(32.dp))
                 },
                 content = content
@@ -58,7 +58,7 @@ fun ChirpAdaptiveResultLayout(
                 verticalArrangement = Arrangement.spacedBy(32.dp)
             ) {
                 if (!configuration.isMobileLandscape)
-                    ChirpBrandLogo()
+                    ChirpSuccessIcon()
                 Column(
                     modifier = Modifier
                         .widthIn(max = 480.dp)

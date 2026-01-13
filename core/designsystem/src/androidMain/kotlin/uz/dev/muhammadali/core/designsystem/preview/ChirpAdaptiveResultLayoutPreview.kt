@@ -7,9 +7,6 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.PreviewLightDark
 import androidx.compose.ui.tooling.preview.PreviewScreenSizes
-import org.jetbrains.compose.ui.tooling.preview.Preview
-import uz.dev.muhammadali.core.designsystem.components.brand.ChirpBrandLogo
-import uz.dev.muhammadali.core.designsystem.components.layouts.ChirpAdaptiveFormLayout
 import uz.dev.muhammadali.core.designsystem.components.layouts.ChirpAdaptiveResultLayout
 import uz.dev.muhammadali.core.designsystem.theme.AppTheme
 
