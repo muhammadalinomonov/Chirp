@@ -32,14 +32,22 @@ import uz.dev.muhammadali.core.designsystem.components.layouts.ChirpSnackbarScaf
 import uz.dev.muhammadali.core.designsystem.components.textfields.ChirpPasswordTextField
 import uz.dev.muhammadali.core.designsystem.components.textfields.ChirpTextField
 import uz.dev.muhammadali.core.designsystem.theme.AppTheme
+import uz.dev.muhammadali.core.presentation.util.ObserveAsEvents
 
 @Composable
 fun RegisterRoot(
-    viewModel: RegisterViewModel = viewModel()
+    viewModel: RegisterViewModel = viewModel(),
+    onRegisterSuccess: (email: String) -> Unit
 ) {
     val state by viewModel.state.collectAsStateWithLifecycle()
 
     val snackbarState = remember { SnackbarHostState() }
+
+    ObserveAsEvents(viewModel.events) { event ->
+        when (event) {
+            is RegisterEvent.Success -> onRegisterSuccess(event.email)
+        }
+    }
     RegisterScreen(
         state = state,
         onAction = viewModel::onAction,

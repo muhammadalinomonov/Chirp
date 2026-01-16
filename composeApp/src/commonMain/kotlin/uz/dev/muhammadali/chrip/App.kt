@@ -9,6 +9,8 @@ import uz.dev.muhammadali.feature.auth.presentation.register.RegisterRoot
 @Preview
 fun App() {
     AppTheme {
-        RegisterRoot()
+        RegisterRoot(
+            onRegisterSuccess = {}
+        )
     }
 }
