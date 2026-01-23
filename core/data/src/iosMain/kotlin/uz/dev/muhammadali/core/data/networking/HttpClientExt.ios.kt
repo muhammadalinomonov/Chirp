@@ -1,11 +1,12 @@
 package uz.dev.muhammadali.core.data.networking
 
+
+import uz.dev.muhammadali.domain.domain.util.DataError
+import uz.dev.muhammadali.domain.domain.util.Result
 import io.ktor.client.engine.darwin.DarwinHttpRequestException
 import io.ktor.client.plugins.HttpRequestTimeoutException
 import io.ktor.client.statement.HttpResponse
-import io.ktor.network.sockets.SocketTimeoutException
 import io.ktor.util.network.UnresolvedAddressException
-import kotlinx.coroutines.currentCoroutineContext
 import kotlinx.coroutines.ensureActive
 import kotlinx.serialization.SerializationException
 import platform.Foundation.NSURLErrorCallIsActive
@@ -18,36 +19,34 @@ import platform.Foundation.NSURLErrorNetworkConnectionLost
 import platform.Foundation.NSURLErrorNotConnectedToInternet
 import platform.Foundation.NSURLErrorResourceUnavailable
 import platform.Foundation.NSURLErrorTimedOut
-import uz.dev.muhammadali.domain.domain.util.DataError
-import uz.dev.muhammadali.domain.domain.util.Result
+import kotlin.coroutines.coroutineContext
 
 actual suspend fun <T> platformSafeCall(
     execute: suspend () -> HttpResponse,
-    handlerResponse: suspend (HttpResponse) -> Result<T, DataError.Remote>
+    handleResponse: suspend (HttpResponse) -> Result<T, DataError.Remote>
 ): Result<T, DataError.Remote> {
     return try {
         val response = execute()
-        handlerResponse(response)
-    } catch (e: DarwinHttpRequestException) {
+        handleResponse(response)
+    } catch(e: DarwinHttpRequestException) {
         handleDarwinException(e)
-    } catch (e: UnresolvedAddressException) {
+    } catch(e: UnresolvedAddressException) {
         Result.Failure(DataError.Remote.NO_INTERNET)
-    } catch (e: SocketTimeoutException) {
+    } catch(e: HttpRequestTimeoutException) {
         Result.Failure(DataError.Remote.REQUEST_TIMEOUT)
-    } catch (e: HttpRequestTimeoutException) {
-        Result.Failure(DataError.Remote.REQUEST_TIMEOUT)
-    } catch (e: SerializationException) {
+    } catch(e: SerializationException) {
         Result.Failure(DataError.Remote.SERIALIZATION)
     } catch (e: Exception) {
-        currentCoroutineContext().ensureActive()
+        coroutineContext.ensureActive()
         Result.Failure(DataError.Remote.UNKNOWN)
     }
 }
 
 private fun handleDarwinException(e: DarwinHttpRequestException): Result<Nothing, DataError.Remote> {
     val nsError = e.origin
-    return if (nsError.domain == NSURLErrorDomain) {
-        when (nsError.code) {
+
+    return if(nsError.domain == NSURLErrorDomain) {
+        when(nsError.code) {
             NSURLErrorNotConnectedToInternet,
             NSURLErrorNetworkConnectionLost,
             NSURLErrorCannotFindHost,
@@ -55,10 +54,11 @@ private fun handleDarwinException(e: DarwinHttpRequestException): Result<Nothing
             NSURLErrorResourceUnavailable,
             NSURLErrorInternationalRoamingOff,
             NSURLErrorCallIsActive,
-            NSURLErrorDataNotAllowed -> Result.Failure(DataError.Remote.NO_INTERNET)
+            NSURLErrorDataNotAllowed -> {
+                Result.Failure(DataError.Remote.NO_INTERNET)
+            }
 
             NSURLErrorTimedOut -> Result.Failure(DataError.Remote.REQUEST_TIMEOUT)
-
             else -> Result.Failure(DataError.Remote.UNKNOWN)
         }
     } else Result.Failure(DataError.Remote.UNKNOWN)

@@ -18,7 +18,7 @@ import uz.dev.muhammadali.domain.domain.util.Result
 
 expect suspend fun <T> platformSafeCall(
     execute: suspend () -> HttpResponse,
-    handlerResponse: suspend (HttpResponse) -> Result<T, DataError.Remote>
+    handleResponse: suspend (HttpResponse) -> Result<T, DataError.Remote>
 ): Result<T, DataError.Remote>
 
 suspend inline fun <reified Request, reified Response : Any> HttpClient.post(
@@ -115,6 +115,7 @@ suspend inline fun <reified T> responseToResult(response: HttpResponse): Result<
         403 -> Result.Failure(DataError.Remote.FORBIDDEN)
         404 -> Result.Failure(DataError.Remote.NOT_FOUND)
         408 -> Result.Failure(DataError.Remote.REQUEST_TIMEOUT)
+        409 -> Result.Failure(DataError.Remote.CONFLICT)
         413 -> Result.Failure(DataError.Remote.PAYLOAD_TOO_LARGE)
         429 -> Result.Failure(DataError.Remote.TOO_MANY_REQUESTS)
         500 -> Result.Failure(DataError.Remote.SERVER_ERROR)

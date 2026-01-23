@@ -26,13 +26,12 @@ class HttpClientFactory(
                 json(
                     json = Json {
                         ignoreUnknownKeys = true
-
                     }
                 )
             }
             install(HttpTimeout) {
-                socketTimeoutMillis = 35_000L
-                requestTimeoutMillis = 35_000L
+                socketTimeoutMillis = 20_000L
+                requestTimeoutMillis = 20_000L
             }
             install(Logging) {
                 logger = object : Logger {

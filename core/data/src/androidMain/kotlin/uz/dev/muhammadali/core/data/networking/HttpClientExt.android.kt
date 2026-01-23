@@ -15,11 +15,11 @@ import kotlin.coroutines.coroutineContext
 
 actual suspend fun <T> platformSafeCall(
     execute: suspend () -> HttpResponse,
-    handlerResponse: suspend (HttpResponse) -> Result<T, DataError.Remote>
+    handleResponse: suspend (HttpResponse) -> Result<T, DataError.Remote>
 ): Result<T, DataError.Remote> {
     return try {
         val response = execute()
-        handlerResponse(response)
+        handleResponse(response)
     } catch (e: UnknownHostException) {
         Result.Failure(DataError.Remote.NO_INTERNET)
     } catch (e: UnresolvedAddressException) {

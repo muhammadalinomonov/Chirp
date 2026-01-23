@@ -24,6 +24,7 @@ import chrip.feature.auth.presentation.generated.resources.username_placeholder
 import chrip.feature.auth.presentation.generated.resources.welcome_to_chirp
 import org.jetbrains.compose.resources.stringResource
 import org.jetbrains.compose.ui.tooling.preview.Preview
+import org.koin.compose.viewmodel.koinViewModel
 import uz.dev.muhammadali.core.designsystem.components.brand.ChirpBrandLogo
 import uz.dev.muhammadali.core.designsystem.components.buttons.ChirpButton
 import uz.dev.muhammadali.core.designsystem.components.buttons.ChirpButtonStyle
@@ -36,7 +37,7 @@ import uz.dev.muhammadali.core.presentation.util.ObserveAsEvents
 
 @Composable
 fun RegisterRoot(
-    viewModel: RegisterViewModel = viewModel(),
+    viewModel: RegisterViewModel = koinViewModel(),
     onRegisterSuccess: (email: String) -> Unit
 ) {
     val state by viewModel.state.collectAsStateWithLifecycle()
