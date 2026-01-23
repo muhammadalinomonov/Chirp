@@ -25,10 +25,10 @@ import uz.dev.muhammadali.core.designsystem.theme.extended
 fun ChirpSimpleSuccessLayout(
     title: String,
     description: String,
-    icon: @Composable () -> Unit,
-    primaryButton: @Composable () -> Unit,
+    modifier: Modifier = Modifier,
     secondaryButton: @Composable (() -> Unit)? = null,
-    modifier: Modifier = Modifier
+    icon: @Composable () -> Unit,
+    primaryButton: @Composable () -> Unit
 ) {
     Column(
         modifier = modifier
@@ -69,7 +69,7 @@ fun ChirpSimpleSuccessLayout(
 @Composable
 @Preview
 fun ChirpSimpleSuccessLayoutPreview() {
-    AppTheme (darkTheme = true){
+    AppTheme(darkTheme = true) {
         ChirpSimpleSuccessLayout(
             title = "Chirp successfully created!",
             description = "We’ve sent verification email to olivia@chirp.chat",
