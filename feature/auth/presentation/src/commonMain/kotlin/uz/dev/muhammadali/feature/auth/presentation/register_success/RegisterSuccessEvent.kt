@@ -1,0 +1,5 @@
+package uz.dev.muhammadali.feature.auth.presentation.register_success
+
+sealed interface RegisterSuccessEvent {
+    data object ResendVerificationEmailSuccess : RegisterSuccessEvent
+}

@@ -155,8 +155,9 @@ fun ColumnScope.AuthHeaderSection(
     AnimatedVisibility(
         visible = errorText != null,
     ) {
-        Text(
-            text = errorText!!,
+        if(errorText != null)
+            Text(
+            text = errorText,
             style = MaterialTheme.typography.labelSmall,
             color = MaterialTheme.colorScheme.error,
             modifier = Modifier

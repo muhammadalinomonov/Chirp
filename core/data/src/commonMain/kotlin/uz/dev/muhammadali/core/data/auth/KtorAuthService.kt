@@ -1,6 +1,7 @@
 package uz.dev.muhammadali.core.data.auth
 
 import io.ktor.client.HttpClient
+import uz.dev.muhammadali.core.data.dto.requests.EmailRequest
 import uz.dev.muhammadali.core.data.dto.requests.RegisterRequest
 import uz.dev.muhammadali.core.data.networking.post
 import uz.dev.muhammadali.domain.domain.auth.AuthService
@@ -15,12 +16,21 @@ class KtorAuthService(
         username: String,
         password: String
     ): EmptyResult<DataError.Remote> {
-        return  httpClient.post(
+        return httpClient.post(
             route = "/auth/register",
             body = RegisterRequest(
                 email = email,
                 username = username,
                 password = password
+            )
+        )
+    }
+
+    override suspend fun resendVerificationEmail(email: String): EmptyResult<DataError.Remote> {
+        return httpClient.post(
+            route = "/auth/resend-verification",
+            body = EmailRequest(
+                email = email
             )
         )
     }

@@ -1,6 +1,5 @@
 package uz.dev.muhammadali.core.designsystem.components.layouts
 
-import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxWidth
@@ -28,13 +27,13 @@ fun ChirpSimpleSuccessLayout(
     modifier: Modifier = Modifier,
     secondaryButton: @Composable (() -> Unit)? = null,
     icon: @Composable () -> Unit,
+    secondaryError: String? = null,
     primaryButton: @Composable () -> Unit
 ) {
     Column(
         modifier = modifier
             .padding(horizontal = 32.dp),
         horizontalAlignment = Alignment.CenterHorizontally,
-        verticalArrangement = Arrangement.spacedBy(8.dp)
     ) {
         icon()
         Column(
@@ -49,19 +48,32 @@ fun ChirpSimpleSuccessLayout(
                 color = MaterialTheme.colorScheme.extended.textPrimary,
                 textAlign = TextAlign.Center
             )
+            Spacer(modifier = Modifier.height(8.dp))
             Text(
                 text = description,
                 style = MaterialTheme.typography.bodySmall,
                 color = MaterialTheme.colorScheme.extended.textSecondary,
                 textAlign = TextAlign.Center
             )
-            Spacer(modifier = Modifier.height(16.dp))
+            Spacer(modifier = Modifier.height(24.dp))
             primaryButton()
 
             secondaryButton?.let {
-                Spacer(modifier = Modifier.height(2.dp))
+                Spacer(modifier = Modifier.height(8.dp))
                 it()
+                if (secondaryError != null) {
+                    Spacer(modifier = Modifier.height(8.dp))
+                    Text(
+                        text = secondaryError,
+                        modifier = Modifier
+                            .fillMaxWidth(),
+                        style = MaterialTheme.typography.labelSmall,
+                        color = MaterialTheme.colorScheme.error,
+                        textAlign = TextAlign.Center
+                    )
+                }
             }
+            Spacer(modifier = Modifier.height(8.dp))
         }
     }
 }

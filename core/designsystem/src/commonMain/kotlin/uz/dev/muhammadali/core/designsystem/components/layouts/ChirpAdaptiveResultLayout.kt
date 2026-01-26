@@ -59,7 +59,7 @@ fun ChirpAdaptiveResultLayout(
                 verticalArrangement = Arrangement.spacedBy(32.dp)
             ) {
                 if (!configuration.isMobileLandscape)
-                    ChirpSuccessIcon()
+                    ChirpBrandLogo()
                 Column(
                     modifier = Modifier
                         .widthIn(max = 480.dp)
