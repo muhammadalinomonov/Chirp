@@ -21,7 +21,7 @@ import uz.dev.muhammadali.core.designsystem.components.brand.ChirpSuccessIcon
 import uz.dev.muhammadali.core.designsystem.components.buttons.ChirpButton
 import uz.dev.muhammadali.core.designsystem.components.buttons.ChirpButtonStyle
 import uz.dev.muhammadali.core.designsystem.components.layouts.ChirpAdaptiveResultLayout
-import uz.dev.muhammadali.core.designsystem.components.layouts.ChirpSimpleSuccessLayout
+import uz.dev.muhammadali.core.designsystem.components.layouts.ChirpSimpleResultLayout
 import uz.dev.muhammadali.core.designsystem.components.layouts.ChirpSnackbarScaffold
 import uz.dev.muhammadali.core.designsystem.theme.AppTheme
 import uz.dev.muhammadali.core.presentation.util.ObserveAsEvents
@@ -62,7 +62,7 @@ fun RegisterSuccessScreen(
         snackbarHostState = snackbarHostState,
     ) {
         ChirpAdaptiveResultLayout {
-            ChirpSimpleSuccessLayout(
+            ChirpSimpleResultLayout(
                 title = stringResource(Res.string.account_successfully_created),
                 description = stringResource(
                     Res.string.verification_email_send_to_x,

@@ -1,6 +1,7 @@
 package uz.dev.muhammadali.core.designsystem.components.layouts
 
 import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.ColumnScope
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
@@ -21,12 +22,12 @@ import uz.dev.muhammadali.core.designsystem.theme.AppTheme
 import uz.dev.muhammadali.core.designsystem.theme.extended
 
 @Composable
-fun ChirpSimpleSuccessLayout(
+fun ChirpSimpleResultLayout(
     title: String,
     description: String,
     modifier: Modifier = Modifier,
     secondaryButton: @Composable (() -> Unit)? = null,
-    icon: @Composable () -> Unit,
+    icon: @Composable ColumnScope.() -> Unit,
     secondaryError: String? = null,
     primaryButton: @Composable () -> Unit
 ) {
@@ -82,7 +83,7 @@ fun ChirpSimpleSuccessLayout(
 @Preview
 fun ChirpSimpleSuccessLayoutPreview() {
     AppTheme(darkTheme = true) {
-        ChirpSimpleSuccessLayout(
+        ChirpSimpleResultLayout(
             title = "Chirp successfully created!",
             description = "We’ve sent verification email to olivia@chirp.chat",
             icon = {

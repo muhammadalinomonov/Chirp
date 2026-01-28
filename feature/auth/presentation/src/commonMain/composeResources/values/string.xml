@@ -2,6 +2,7 @@
 <resources>
     <string name="welcome_to_chirp">Welcome to chirp</string>
     <string name="username">Username</string>
+    <string name="close">Close</string>
     <string name="email">Email</string>
     <string name="password">Password</string>
     <string name="register">Register</string>
@@ -19,4 +20,14 @@
     <string name="verification_email_send_to_x">We’ve sent verification email to %1$s</string>
     <string name="resend_verification_email">Resend verification email</string>
     <string name="verification_email_successfully_resent">Verification email successfully resent</string>
+    <string name="verifying_account">Verifying account...</string>
+    <string name="email_verified_successfully">Email verified successfully!</string>
+    <string name="email_verified_failed">Failed to verify your email</string>
+    <string name="email_verified_successfully_description">
+        Your email has been verified. You can Log in with your credentials
+    </string>
+    <string name="email_verified_failed_description">
+        Unable to verify email. Maybe the link is invalid or expired.
+    </string>
+
 </resources>
