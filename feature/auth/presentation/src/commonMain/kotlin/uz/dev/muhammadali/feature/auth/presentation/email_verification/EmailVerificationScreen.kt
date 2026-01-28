@@ -17,7 +17,6 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
-import androidx.lifecycle.viewmodel.compose.viewModel
 import chrip.feature.auth.presentation.generated.resources.Res
 import chrip.feature.auth.presentation.generated.resources.close
 import chrip.feature.auth.presentation.generated.resources.email_verified_failed
@@ -28,6 +27,7 @@ import chrip.feature.auth.presentation.generated.resources.login
 import chrip.feature.auth.presentation.generated.resources.verifying_account
 import org.jetbrains.compose.resources.stringResource
 import org.jetbrains.compose.ui.tooling.preview.Preview
+import org.koin.compose.viewmodel.koinViewModel
 import uz.dev.muhammadali.core.designsystem.components.brand.ChirpFailureIcon
 import uz.dev.muhammadali.core.designsystem.components.brand.ChirpSuccessIcon
 import uz.dev.muhammadali.core.designsystem.components.buttons.ChirpButton
@@ -39,7 +39,7 @@ import uz.dev.muhammadali.core.designsystem.theme.extended
 
 @Composable
 fun EmailVerificationRoot(
-    viewModel: EmailVerificationViewModel = viewModel()
+    viewModel: EmailVerificationViewModel = koinViewModel()
 ) {
     val state by viewModel.state.collectAsStateWithLifecycle()
 

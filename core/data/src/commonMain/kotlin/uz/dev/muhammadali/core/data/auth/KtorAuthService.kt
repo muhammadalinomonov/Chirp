@@ -3,6 +3,7 @@ package uz.dev.muhammadali.core.data.auth
 import io.ktor.client.HttpClient
 import uz.dev.muhammadali.core.data.dto.requests.EmailRequest
 import uz.dev.muhammadali.core.data.dto.requests.RegisterRequest
+import uz.dev.muhammadali.core.data.networking.get
 import uz.dev.muhammadali.core.data.networking.post
 import uz.dev.muhammadali.domain.domain.auth.AuthService
 import uz.dev.muhammadali.domain.domain.util.DataError
@@ -32,6 +33,13 @@ class KtorAuthService(
             body = EmailRequest(
                 email = email
             )
+        )
+    }
+
+    override suspend fun verifyEmail(token: String): EmptyResult<DataError.Remote> {
+        return httpClient.get(
+            route = "/auth/verify",
+            queryParameters = mapOf("token" to token)
         )
     }
 }
