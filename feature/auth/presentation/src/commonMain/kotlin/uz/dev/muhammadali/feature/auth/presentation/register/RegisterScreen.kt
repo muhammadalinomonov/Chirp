@@ -8,9 +8,9 @@ import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.remember
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.text.input.KeyboardType
 import androidx.compose.ui.unit.dp
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
-import androidx.lifecycle.viewmodel.compose.viewModel
 import chrip.feature.auth.presentation.generated.resources.Res
 import chrip.feature.auth.presentation.generated.resources.email
 import chrip.feature.auth.presentation.generated.resources.email_placeholder
@@ -38,7 +38,8 @@ import uz.dev.muhammadali.core.presentation.util.ObserveAsEvents
 @Composable
 fun RegisterRoot(
     viewModel: RegisterViewModel = koinViewModel(),
-    onRegisterSuccess: (email: String) -> Unit
+    onRegisterSuccess: (email: String) -> Unit,
+    onLoginClick: () -> Unit
 ) {
     val state by viewModel.state.collectAsStateWithLifecycle()
 
@@ -51,7 +52,13 @@ fun RegisterRoot(
     }
     RegisterScreen(
         state = state,
-        onAction = viewModel::onAction,
+        onAction = { action ->
+            when (action) {
+                is RegisterAction.OnLoginClick -> onLoginClick()
+                else -> Unit
+            }
+            viewModel.onAction(action)
+        },
         snackbarHostState = snackbarState
     )
 }
@@ -86,6 +93,7 @@ fun RegisterScreen(
             Spacer(modifier = Modifier.height(20.dp))
             ChirpTextField(
                 state = state.emailTextState,
+                keyboardType = KeyboardType.Email,
                 placeholder = stringResource(Res.string.email_placeholder),
                 supportingText = state.emailError?.asString(),
                 title = stringResource(Res.string.email),
@@ -130,8 +138,6 @@ fun RegisterScreen(
                     onAction(RegisterAction.OnLoginClick)
                 }
             )
-
-
         }
     }
 }

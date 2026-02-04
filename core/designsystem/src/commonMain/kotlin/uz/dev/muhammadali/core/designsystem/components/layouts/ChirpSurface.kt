@@ -26,7 +26,7 @@ import uz.dev.muhammadali.core.designsystem.theme.AppTheme
 fun ChirpSurface(
     modifier: Modifier = Modifier,
     header: @Composable ColumnScope.() -> Unit = {},
-    content: @Composable ColumnScope.() -> Unit,
+    content: @Composable ColumnScope.() -> Unit
 ) {
     Surface(
         color = MaterialTheme.colorScheme.background,
@@ -34,7 +34,8 @@ fun ChirpSurface(
     ) {
         Column(
             horizontalAlignment = Alignment.CenterHorizontally,
-            modifier = modifier.fillMaxSize(),
+            modifier = Modifier
+                .fillMaxSize()
         ) {
             header()
             Surface(
@@ -42,7 +43,10 @@ fun ChirpSurface(
                 modifier = Modifier
                     .weight(1f)
                     .fillMaxWidth(),
-                shape = RoundedCornerShape(topStart = 20.dp, topEnd = 20.dp)
+                shape = RoundedCornerShape(
+                    topStart = 20.dp,
+                    topEnd = 20.dp
+                )
             ) {
                 Column(
                     modifier = Modifier

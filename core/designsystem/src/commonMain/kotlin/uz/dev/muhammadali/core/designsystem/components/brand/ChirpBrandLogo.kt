@@ -21,11 +21,3 @@ fun ChirpBrandLogo(
         modifier = modifier
     )
 }
-
-@Composable
-@Preview
-fun ChirpBrandLogoPreview() {
-    AppTheme {
-        ChirpSuccessIcon()
-    }
-}

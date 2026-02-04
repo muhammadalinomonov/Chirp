@@ -27,7 +27,7 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import org.jetbrains.compose.ui.tooling.preview.Preview
-import uz.dev.muhammadali.core.designsystem.components.brand.ChirpSuccessIcon
+import uz.dev.muhammadali.core.designsystem.components.brand.ChirpBrandLogo
 import uz.dev.muhammadali.core.designsystem.theme.AppTheme
 import uz.dev.muhammadali.core.designsystem.theme.extended
 import uz.dev.muhammadali.core.presentation.util.DeviceConfiguration
@@ -63,8 +63,8 @@ fun ChirpAdaptiveFormLayout(
                 Spacer(modifier = Modifier.height(24.dp))
                 AuthHeaderSection(
                     headerText = headerText,
-                    errorText = errorText,
-                    headerColor = headerColor
+                    headerColor = headerColor,
+                    errorText = errorText
                 )
                 Spacer(modifier = Modifier.height(24.dp))
                 formContent()
@@ -155,15 +155,15 @@ fun ColumnScope.AuthHeaderSection(
     AnimatedVisibility(
         visible = errorText != null,
     ) {
-        if(errorText != null)
+        if (errorText != null)
             Text(
-            text = errorText,
-            style = MaterialTheme.typography.labelSmall,
-            color = MaterialTheme.colorScheme.error,
-            modifier = Modifier
-                .fillMaxWidth(),
-            textAlign = headerTextAlign,
-        )
+                text = errorText,
+                style = MaterialTheme.typography.labelSmall,
+                color = MaterialTheme.colorScheme.error,
+                modifier = Modifier
+                    .fillMaxWidth(),
+                textAlign = headerTextAlign,
+            )
     }
 }
 
@@ -176,7 +176,7 @@ fun ChirpAdaptiveFormLayoutLightPreview() {
             headerText = "Welcome to Chirp!",
             errorText = "Something went wrong",
             logo = {
-                ChirpSuccessIcon()
+                ChirpBrandLogo()
             },
             formContent = {
                 Text(text = "Form content")
@@ -193,7 +193,7 @@ fun ChirpAdaptiveFormLayoutDarkPreview() {
             headerText = "Welcome to Chirp!",
             errorText = "Something went wrong",
             logo = {
-                ChirpSuccessIcon()
+                ChirpBrandLogo()
             },
             formContent = {
                 Text(text = "Form content")
