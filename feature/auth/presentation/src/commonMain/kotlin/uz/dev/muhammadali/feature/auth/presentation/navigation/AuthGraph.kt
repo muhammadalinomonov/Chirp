@@ -24,7 +24,7 @@ fun NavGraphBuilder.authGraph(
                     navController.navigate(AuthGraphRoutes.ForgetPassword)
                 },
                 onRegisterClick = {
-                    navController.navigate(AuthGraphRoutes.Register){
+                    navController.navigate(AuthGraphRoutes.Register) {
                         restoreState = true
                         launchSingleTop = true
                     }
@@ -49,7 +49,15 @@ fun NavGraphBuilder.authGraph(
             )
         }
         composable<AuthGraphRoutes.RegisterSuccess> {
-            RegisterSuccessRoot()
+            RegisterSuccessRoot(
+                onLoginClick = {
+                    navController.navigate(AuthGraphRoutes.Login) {
+                        popUpTo<AuthGraphRoutes.RegisterSuccess> {
+                            inclusive = true
+                        }
+                    }
+                }
+            )
         }
 
         composable<AuthGraphRoutes.EmailVerificationScreen>(
@@ -62,7 +70,23 @@ fun NavGraphBuilder.authGraph(
                 },
             )
         ) {
-            EmailVerificationRoot()
+            EmailVerificationRoot(
+                onLoginClick = {
+                    navController.navigate(AuthGraphRoutes.Login) {
+                        popUpTo<AuthGraphRoutes.EmailVerificationScreen> {
+                            inclusive = true
+                        }
+                    }
+                },
+                onCloseClick = {
+                    navController.navigate(AuthGraphRoutes.Login) {
+                        popUpTo<AuthGraphRoutes.EmailVerificationScreen> {
+                            inclusive = true
+                        }
+                    }
+                }
+
+            )
         }
     }
 }

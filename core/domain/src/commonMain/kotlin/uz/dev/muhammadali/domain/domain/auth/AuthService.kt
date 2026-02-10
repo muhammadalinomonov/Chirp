@@ -2,8 +2,15 @@ package uz.dev.muhammadali.domain.domain.auth
 
 import uz.dev.muhammadali.domain.domain.util.DataError
 import uz.dev.muhammadali.domain.domain.util.EmptyResult
+import uz.dev.muhammadali.domain.domain.util.Result
 
 interface AuthService {
+
+    suspend fun login(
+        email: String,
+        password: String
+    ): Result<AuthInfo, DataError.Remote>
+
     suspend fun register(
         email: String,
         username: String,

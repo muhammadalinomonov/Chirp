@@ -25,6 +25,7 @@
     <string name="email_verified_successfully">Email verified successfully!</string>
     <string name="email_verified_failed">Failed to verify your email</string>
     <string name="error_invalid_credentials">The email or password is incorrect</string>
+    <string name="error_email_not_verified">Unable to login because your email is not verified</string>
     <string name="forgot_password">Forgot password?</string>
     <string name="create_account">Create account</string>
     <string name="email_verified_successfully_description">

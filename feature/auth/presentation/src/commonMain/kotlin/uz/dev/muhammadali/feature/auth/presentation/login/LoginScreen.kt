@@ -18,6 +18,7 @@ import androidx.compose.ui.unit.dp
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import chrip.feature.auth.presentation.generated.resources.Res
 import chrip.feature.auth.presentation.generated.resources.create_account
+import chrip.feature.auth.presentation.generated.resources.email
 import chrip.feature.auth.presentation.generated.resources.email_placeholder
 import chrip.feature.auth.presentation.generated.resources.forgot_password
 import chrip.feature.auth.presentation.generated.resources.login
@@ -34,6 +35,7 @@ import uz.dev.muhammadali.core.designsystem.components.layouts.ChirpSnackbarScaf
 import uz.dev.muhammadali.core.designsystem.components.textfields.ChirpPasswordTextField
 import uz.dev.muhammadali.core.designsystem.components.textfields.ChirpTextField
 import uz.dev.muhammadali.core.designsystem.theme.AppTheme
+import uz.dev.muhammadali.core.presentation.util.ObserveAsEvents
 
 @Composable
 fun LoginRoot(
@@ -44,6 +46,12 @@ fun LoginRoot(
 ) {
     val state by viewModel.state.collectAsStateWithLifecycle()
 
+    ObserveAsEvents(viewModel.events) { event ->
+        when (event) {
+            LoginEvents.Success -> onLoginSuccess()
+        }
+
+    }
     LoginScreen(
         state = state,
         onAction = { action ->
@@ -81,7 +89,7 @@ fun LoginScreen(
                 singleLine = true,
                 modifier = Modifier
                     .fillMaxWidth(),
-                title = stringResource(Res.string.login)
+                title = stringResource(Res.string.email)
             )
             Spacer(modifier = Modifier.height(16.dp))
             ChirpPasswordTextField(

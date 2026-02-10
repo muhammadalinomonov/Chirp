@@ -39,13 +39,21 @@ import uz.dev.muhammadali.core.designsystem.theme.extended
 
 @Composable
 fun EmailVerificationRoot(
-    viewModel: EmailVerificationViewModel = koinViewModel()
+    viewModel: EmailVerificationViewModel = koinViewModel(),
+    onLoginClick: () -> Unit,
+    onCloseClick: () -> Unit
 ) {
     val state by viewModel.state.collectAsStateWithLifecycle()
 
     EmailVerificationScreen(
         state = state,
-        onAction = viewModel::onAction
+        onAction = {
+            when (it) {
+                EmailVerificationAction.OnCloseClick -> onCloseClick()
+                EmailVerificationAction.OnLoginClick -> onLoginClick()
+            }
+            viewModel.onAction(it)
+        }
     )
 }
 
@@ -72,13 +80,12 @@ fun EmailVerificationScreen(
                     },
                     primaryButton = {
                         ChirpButton(
-                            text = stringResource(Res.string.close),
+                            text = stringResource(Res.string.login),
                             modifier = Modifier
                                 .fillMaxWidth(),
                             onClick = {
-                                onAction(EmailVerificationAction.OnCloseClick)
+                                onAction(EmailVerificationAction.OnLoginClick)
                             },
-                            style = ChirpButtonStyle.SECONDARY
                         )
                     }
                 )
@@ -98,12 +105,13 @@ fun EmailVerificationScreen(
                     },
                     primaryButton = {
                         ChirpButton(
-                            text = stringResource(Res.string.login),
+                            text = stringResource(Res.string.close),
                             modifier = Modifier
                                 .fillMaxWidth(),
                             onClick = {
-                                onAction(EmailVerificationAction.OnLoginClick)
-                            }
+                                onAction(EmailVerificationAction.OnCloseClick)
+                            },
+                            style = ChirpButtonStyle.SECONDARY
                         )
                     }
                 )
