@@ -21,13 +21,15 @@ import kotlinx.coroutines.launch
 import uz.dev.muhammadali.core.presentation.util.UiText
 import uz.dev.muhammadali.core.presentation.util.toUiText
 import uz.dev.muhammadali.domain.domain.auth.AuthService
+import uz.dev.muhammadali.domain.domain.auth.SessionStorage
 import uz.dev.muhammadali.domain.domain.util.DataError
 import uz.dev.muhammadali.domain.domain.util.onFailure
 import uz.dev.muhammadali.domain.domain.util.onSuccess
 import uz.dev.muhammadali.feature.auth.domain.EmailValidator
 
 class LoginViewModel(
-    private val authService: AuthService
+    private val authService: AuthService,
+    private val sessionStorage: SessionStorage
 ) : ViewModel() {
 
     private var hasLoadedInitialData = false
@@ -81,6 +83,7 @@ class LoginViewModel(
                     )
                 }
             }
+
             else -> Unit
         }
     }
@@ -97,6 +100,7 @@ class LoginViewModel(
             authService
                 .login(email, password)
                 .onSuccess { authInfo ->
+                    sessionStorage.set(authInfo)
                     _state.update {
                         it.copy(
                             isLoggingIn = false

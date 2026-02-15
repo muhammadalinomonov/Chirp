@@ -21,3 +21,20 @@ fun UserSerializable.toDomain(): User {
         hasVerifiedEmail = hasVerifiedEmail,
     )
 }
+
+fun User.toSerializable(): UserSerializable {
+    return UserSerializable(
+        id = id,
+        email = email,
+        username = username,
+        hasVerifiedEmail = hasVerifiedEmail,
+    )
+}
+
+fun AuthInfo.toSerializable(): AuthInfoSerializable {
+    return AuthInfoSerializable(
+        accessToken = accessToken,
+        refreshToken = refreshToken,
+        user = user.toSerializable()
+    )
+}
